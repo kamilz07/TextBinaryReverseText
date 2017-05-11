@@ -1,0 +1,24 @@
+use strict;
+use warnings;
+
+my $string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+print 'Original string: ', $string,                   "\n";
+print 'Using function:  ', reverse_in_place($string), "\n";
+print 'Using reverse:   ', scalar reverse  ($string), "\n";    # For comparison
+
+sub reverse_in_place
+{
+    my ($string) = @_;
+    my  @array   = split //, $string;
+    my  $n       = scalar @array;
+
+    for (0 .. $n / 2 - 1)
+    {
+        my $tmp             = $array[$_];
+        $array[$_]          = $array[$n - $_ - 1];
+        $array[$n - $_ - 1] = $tmp;
+    }
+
+    return join('', @array);
+}
